@@ -2,13 +2,14 @@ package fr.milk.twisters.demo.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "category")
 public class Category {
 
-    @ManyToOne
-    @JoinColumn(name = "resource_id")
-    private Resource resource;
+    @OneToMany(mappedBy = "category")
+    private List<Resource> resources;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,8 +21,20 @@ public class Category {
     @Column(length = 100,nullable = false, columnDefinition = "TEXT")
     private String description;
 
-
     public Category() {
+    }
+
+    public Category(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public List<Resource> getResources() {
+        return resources;
+    }
+
+    public void setResources(List<Resource> resources) {
+        this.resources = resources;
     }
 
     public int getId() {

@@ -1,19 +1,20 @@
 package fr.milk.twisters.demo.entity;
 
 import jakarta.persistence.*;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "resource")
 public class Resource {
 
-    @OneToMany(mappedBy = "resource")
-    private List<Category> categories ;
-
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category ;
 
     @Id
     @GeneratedValue
@@ -23,25 +24,42 @@ public class Resource {
     @Column(length = 100,nullable = false)
     private String title;
 
-
     @Column(length = 100,nullable = false, columnDefinition = "TEXT")
     private String description;
 
     @Column(length = 100,nullable = false)
     private String url;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private EnumType type;
+    private Type type;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private EnumType status;
+    private Status status;
 
     @Column(nullable = false)
     @CreationTimestamp
     private Instant createdAt;
 
-
     public Resource() {
+    }
+
+    public Resource(String title, String description, String url, Type type, Status status) {
+        this.title = title;
+        this.description = description;
+        this.url = url;
+        this.type = type;
+        this.status = status;
+    }
+
+    public Resource(Category category, String title, String description, String url, Type type, Status status) {
+        this.category = category;
+        this.title = title;
+        this.description = description;
+        this.url = url;
+        this.type = type;
+        this.status = status;
     }
 
     public int getId() {
@@ -50,6 +68,15 @@ public class Resource {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public String getTitle() {
@@ -76,19 +103,19 @@ public class Resource {
         this.url = url;
     }
 
-    public EnumType getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(EnumType type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
-    public EnumType getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(EnumType status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
