@@ -7,8 +7,6 @@ import fr.milk.twisters.demo.repository.ResourceRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 import static fr.milk.twisters.demo.entity.Status.*;
 import static fr.milk.twisters.demo.entity.Type.*;
 

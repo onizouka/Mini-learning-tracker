@@ -3,6 +3,7 @@ package fr.milk.twisters.demo.entity;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "category")
@@ -12,8 +13,8 @@ public class Category {
     private List<Resource> resources;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @Column(length = 100,nullable = false)
     private String name;
@@ -37,11 +38,11 @@ public class Category {
         this.resources = resources;
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

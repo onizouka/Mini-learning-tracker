@@ -7,6 +7,7 @@ import jakarta.persistence.Enumerated;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
+import java.util.UUID;
 
 @Entity
 @Table(name = "resource")
@@ -17,9 +18,9 @@ public class Resource {
     private Category category ;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name="Resource_id")
-    private int id;
+    private UUID id;
 
     @Column(length = 100,nullable = false)
     private String title;
@@ -62,11 +63,11 @@ public class Resource {
         this.status = status;
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
