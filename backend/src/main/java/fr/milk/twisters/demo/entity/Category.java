@@ -1,5 +1,6 @@
 package fr.milk.twisters.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -30,6 +31,7 @@ public class Category {
         this.description = description;
     }
 
+    @JsonIgnore
     public List<Resource> getResources() {
         return resources;
     }
