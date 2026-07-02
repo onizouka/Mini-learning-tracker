@@ -25,7 +25,10 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Category blog = categoryRepository.save(new Category("Blog", "Lorem ipsum"));
-        resourceRepository.save(new Resource(blog, "Titre", "Une belle description", "http://www.google.fr", ARTICLE, TODO));
+        if(this.categoryRepository.count() == 0 && this.resourceRepository.count() == 0) {
+            Category blog = categoryRepository.save(new Category("Blog", "Lorem ipsum"));
+            resourceRepository.save(new Resource(blog, "Titre", "Une belle description", "http://www.google.fr", ARTICLE, TODO));
+        }
+
     }
 }
