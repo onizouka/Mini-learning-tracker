@@ -25,9 +25,18 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        if(this.categoryRepository.count() == 0 && this.resourceRepository.count() == 0) {
-            Category blog = categoryRepository.save(new Category("Blog", "Lorem ipsum"));
-            resourceRepository.save(new Resource(blog, "Titre", "Une belle description", "http://www.google.fr", ARTICLE, TODO));
+        if(this.categoryRepository.count() == 0) {
+            categoryRepository.save(new Category("ARTICLE", "Article de presse ou blog sur une information donnée"));
+            categoryRepository.save(new Category("VIDEO", "Vidéo de formation sur une technologie"));
+            categoryRepository.save(new Category("DOCUMENTATION", "Accès à la documentation officielle ou pertinente"));
+            categoryRepository.save(new Category("COURSE", "Tutoriel en ligne"));
+            categoryRepository.save(new Category("OTHER", "Tout ce qui ne rentre pas dans les 4 cas précédents"));
+        }
+
+        if(this.resourceRepository.count() == 0) {
+            resourceRepository.save(new Resource("Les JPA en JAVA", "Réviser les JPA", "www.baeldung.com", DOCUMENTATION, IN_PROGRESS ));
+            resourceRepository.save(new Resource("Les joies du CSS", "Réviser le CSS", "www.youtube.com/Grafikart", VIDEO, TODO ));
+            resourceRepository.save(new Resource("Le JS c'est nul", "Pourquoi le JS c'est moins bien que le HTML", "", ARTICLE, DONE));
         }
 
     }

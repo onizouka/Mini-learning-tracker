@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 import * as React from "react";
 
-
 function ResourceForm(){
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -9,7 +8,6 @@ function ResourceForm(){
   const [type, setType] = useState('');
   const [status, setStatus] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-
 
   useEffect(() => {
     if (!type.trim()) {
@@ -22,8 +20,19 @@ function ResourceForm(){
     } else {
       setErrorMessage('');
     }
+    if( !validateUrl(url)){
+      setErrorMessage("Veuillez indiquer une URL valide");
+      return;
+    }
   }, [type]);
 
+  function cleanForm() {
+    setTitle("");
+    setDescription("");
+    setUrl("");
+    setType("");
+    setStatus("");
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,6 +44,7 @@ function ResourceForm(){
       type,
       status
     };
+
     if (!title || !url || !type || !status) {
       setErrorMessage("Tous les champs obligatoires doivent être remplis");
       return;
@@ -48,7 +58,14 @@ function ResourceForm(){
     });
 
     alert('Ressource créée');
+
+    cleanForm();
   };
+
+  function validateUrl(url: string) {
+    const regex = /^([\w-]+\.)+[\w-]{2,}(\/.*)?$/gm;
+    return (url.match(regex));
+  }
 
   function validateType (type: string):boolean {
     const validTypes = [
@@ -60,7 +77,7 @@ function ResourceForm(){
     ];
     return validTypes.includes(type.toUpperCase());
   }
-  
+
 
 
 

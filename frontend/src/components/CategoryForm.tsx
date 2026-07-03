@@ -1,11 +1,13 @@
 import { useState} from "react";
 
-
-
-
 function CategoryForm() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+
+  function cleanForm() {
+    setName("");
+    setDescription("");
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,8 +26,8 @@ function CategoryForm() {
   });
 
   alert("categorie créé");
-  setName("");
-  setDescription("");
+
+  cleanForm();
 };
 
 return(
@@ -34,14 +36,14 @@ return(
     <h1>Créer une catégorie</h1>
 
     <form onSubmit={handleSubmit}>
-      <label htmlFor="name">Nombre</label>
+      <label htmlFor="name">Nom de la catégorie</label>
       <input
       id="name"
       name="name"
       value={name}
       onChange={(e)=> setName(e.target.value)}
       />
-      <label htmlFor="description">Nombre</label>
+      <label htmlFor="description">Description</label>
       <textarea
         id="description"
         value={description}

@@ -2,9 +2,9 @@ import { Link, Route, Routes } from "react-router";
 
 import ResourcesList from "../components/ResourcesList";
 import ResourceForm from "../components/ResourceForm";
-import ResourceDetail from "./ResourceDetail.tsx";
-import CategoryList from "./CategoryList.tsx";
-import CategoryForm from "./CategoryForm.tsx";
+import ResourceDetail from "../components/ResourceDetail.tsx";
+import CategoryList from "../components/CategoryList.tsx";
+import CategoryForm from "../components/CategoryForm.tsx";
 
 
 export default function Router() {
