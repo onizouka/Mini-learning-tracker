@@ -63,6 +63,9 @@ public class Resource {
         this.status = status;
     }
 
+
+
+
     public UUID getId() {
         return id;
     }
